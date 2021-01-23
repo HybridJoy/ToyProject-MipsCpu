@@ -1,0 +1,119 @@
+2018/12/10 16:11 把实验四的源码备份在  base code 目录下
+2018/12/10 16:24 创建仓库的主要目录结构树，添加 Readme.txt 说明文件
+2018/12/10 21:59 添加了全局的宏定义文件 defines.vh
+2018/12/11 9:46 更新了宏定义文件 defines.vh
+   	         添加了修改后的控制信号译码文件 maindec.v
+  	         本次修改：1、使用了宏定义文件
+		           2、整合所有控制信号为 control_signs
+		           3、添加了对其他指令的译码
+2018/12/11 10:21 添加了修改后的 mips.v
+	          添加了修改后的控制模块 controller.v
+	          添加了修改后的数据通路模块 datapath.v
+	          添加了修改后的ALU控制信号译码模块 aludec.v
+	          添加了修改后的ALU模块 alu.c
+	          再次修改了控制信号译码模块 maindec.v
+	          本次修改：1、为各模块使用了宏定义文件
+		            2、修改controller、maindec、aludec中的aluop为4位
+		            3、修改mips、controller、datapath、aludec、alu中alucontrol为5位
+		            4、修改maindec中的control_signs为11位
+2018/12/11 10:25 为之前的提交记录增添修改方向
+2018/12/11 11:38 再次修改了ALU控制信号译码模块 aludec.v
+	          本次修改：添加了对其他指令的支持，logic(8),arithmetic(14),shift(6),move(4)
+2018/12/11 11:42 对以前的提交记录进行了文本修改
+2018/12/11 15:39 添加了修改后的符号拓展模块 signext.v
+	          再次修改了数据通路模块 datapath.v
+	          本次修改：增加了 signext 模块的传入参数，以避免有误的有符号拓展
+2018/12/11 16:56 添加了修改后的提前分支条件判断模块 eqcmp.v
+	          再次修改了数据通路模块 datapath.v
+	          本次修改：增加了指令的opcode和rt部分作为模块eqcmp的传入参数，以支持其他的分支跳转指令
+2018/12/11 18:07 更新宏定义文件 defines.vh
+2018/12/11 18:39 修改了ALU模块 alu.v 和数据通路模块 datapath.v
+	          本次修改：1、增加了ALU模块的传入参数，以支持移位指令
+		            2、添加了基本算术指令、逻辑运算指令和移位指令
+	         	            3、再次修改了数据通路模块datapath.v
+	                           4、替换了现有的signnext模块
+2018/12/11 18:59 完成了逻辑运算指令和移位指令的alu.v
+	              修改了数据通路模块datapath.v 使之可以支持逻辑运算指令和移位指令
+	              仿真可以通过逻辑运算指令和移位指令 即助教提供的第1、2、3个coe
+2018/12/11 19:00 修正之前数据通路模块 datapath.v 的冲突
+2018/12/12 9:28  再次修改了maindec.v、controller.v、mips.v、datapath.v
+	          添加了修改后的冒险模块 hazard.v
+  	          本次修改：1、maindec.v 增加了三个信号 jal,jr,bal,以支持其他分支跳转指令
+		            2、修改mips，增加controller和datapath之间的信号传输
+		            3、对应修改controller和datapath
+		            4、为冒险模块hazard加入新的信号量bal和jump
+2018/12/12 9:33  修正了日志内容的冲突
+2018/12/12 15:23 再次修改了maindec.v、controller.v、mips.v，hazard.v
+	           本次修改：1、增加了jalD作为controller和datapath的信号传输
+		             2、修改了冒险模块hazard中flushE的判断
+2018/12/12 16:13 修改了提前分支条件判断模块 eqcmp.v
+	          本次修改：修正bgtz指令的错误逻辑
+2018/12/12 16:47 新增了当前指令显示模块 instdec.v
+	           添加了修改后顶层模块的 top.v
+	           添加了修改后的仿真模块 testbench.v
+	           本次修改：1、添加了数据存储器的使能端口 memen
+		             2、顶层和仿真模块加入了对instdec模块的导入
+2018/12/12 20:14 新增了访存控制模块memsel.v，以支持单字节，半字访存
+	           修改了top.v、mips.v、datapath.v、controller.v、maindec.v
+	           本次修改：1、控制信号译码模块maindec.v增加了memen信号
+		             2、修改了top.v memwrite 为4位
+		             3、修改了mips.v的输入输出，以接入访存控制模块
+		             4、修改了controller.v的相关模块，以传递memen信号
+		             5、在datapath中增添了opE和opM,为memsel传递控制信号
+2018/12/12 23:26 修改了alu.v 实现了乘除法 
+	           修改了defines.vh 增加了乘除法相关宏定义
+	           新增div.v 除法模块
+2018/12/12 23:47 修改了访存控制模块memsel.v
+	           本次修改：修改了访存控制的部分逻辑
+2018/12/13 16:31 修改了maindec.v、controller.v和mips.v
+	          本次修改：1、maindec增加了hilo寄存器写控制信号
+		            2、修改了controller和mips相应的数据通道
+2018/12/14 15:47 alu.v 完成除法模块,修改了相关的controller.v、datapath.v、hazard.v和mips.v
+	          本次改动：1、controller.v datapath.v hazard.v 支持除法功能
+	          	            2、mips.v top.v 接口改动
+		            3、前52条指令完成
+2018/12/14 17:18 在branch目录下创建第一个版本的全代码 first 52 insts
+2018/12/14 21:39 修改了alu中的slt操作
+2018/12/14 22:03 修改了mips.v、controller.v、datapath.v、maindec.v、datapath.v、defines.vh
+	           本次修改：1、添加了最后五条指令的整体译码逻辑
+		             2、更新宏定义文件
+2018/12/14 22:07 同步更新了trunk的alu.v
+2018/12/17 20:43 修改了mips.v、controller.v、datapath.v、maindec.v、aludec.v、datapath.v、defines.vh
+	           本次修改：1、maindec增加了cp0写控制信号 cp0write
+		             2、对应增加了cp0write信号的传递通路
+		             3、更新了宏定义文件
+2018/12/17 20:43 修改了memsel.v mips.v datapath.v
+	            本次修改：1、为memsel增加了两个输出，adel，ades，表示读写数据的地址错误
+		              2、对应修改了mips.v和datapath.v的信号传递
+2018/12/19 13:20 在branch下创建了第二个分支 first 57 insts
+ 	          本次修改：1、大致上实现了57条指令（初稿）
+	                           2、hazard.v完善数据前推 包括hilo cp0 jr等 
+		           3、基于52条指令datapath.v的扩增
+		           4、新增例外处理模块和cp0寄存器模块
+		           5、流水线flush与stall等逻辑的修改与完善
+		           6、controller.v的修改
+		           7、alu.v的修改 增加了mtc0和mfc0
+		           8、修改mfhi mflo的bug
+2018/12/20 10:39 在branch下创建了第三个分支 58 test points pass
+	           进度：通过了完整coe的58个测试点
+	           修改：1、调整了hazard模块的数据前推逻辑
+  		      2、暂时修复了除法指令的操作数异常的问题
+	           不足：1、alu模块的overflow信号的处理
+		      2、访存模块和异常模块的逻辑控制	
+2018/12/20 10:43 维护了之前的日志记录 
+2018/12/20 12:14 在branch下创建了第三个分支 64 test points pass
+	           进度：通过了完整coe的64个测试点
+	           修改：调整了memsel模块的字节存取逻辑
+	           不足：1、alu模块的overflow信号的处理
+		      2、异常模块的逻辑控制	
+2018/12/20 19:10 修改了alu中的overflow逻辑 
+2018/12/20 20:37 在branch下创建了第四个分支 69 test points pass 
+	           修改：还原了alu除法方面的逻辑     
+2018/12/20 22:28 在branch下创建了第五个分支 75 test points pass 
+	          修改：1、排除了flushw和stallE同时为1时，trace数据少取一个周期
+		     2、在memsel增加了数据地址不对写使能置0的逻辑
+2018/12/20 23:49 在branch下创建了第六个分支 76 test points pass 
+	          修改：增加了无效指令的判断
+2018/12/21 13:31 在branch下创建了第七个分支 89 test points pass  
+	         修改：1、新添了指令 max
+		    2、规范化代码  
